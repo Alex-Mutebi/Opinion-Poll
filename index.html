@@ -1212,7 +1212,7 @@
     let allVotes = [];
 let statsUnlocked = false;
 
-const SCRIPT_URL = "PASTE_YOUR_WEB_APP_URL_HERE";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzHJfZROVJgnUsjqVFwQiKZKyKQqaDuqbsTO_Hl8fm3D757CbWFqX93jRs6lEbaW8hE/exec";
 
    
 
@@ -1339,21 +1339,6 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
    return;
 }
 
-const result = await fetch("https://script.google.com/macros/s/AKfycbyf261qgKHuph2xbVCZsoJvzwmielDZ463e6L1Z5izHup_ASPSwIY5zrkKAiUFU8qIM/exec", {
-   method: "POST",
-   headers: {
-      "Content-Type": "application/json"
-   },
-   body: JSON.stringify(voteData)
-});
-
-const response = await result.json();
-
-if (!response.success) {
-   alert(response.message);
-   btn.disabled = false;
-   return;
-}
 
       selectedVotes = {};
       categories.forEach(cat => selectedVotes[cat.id] = null);
