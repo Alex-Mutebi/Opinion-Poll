@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Star Magazine Opinion Poll 2026</title>
-  <script src="/_sdk/data_sdk.js"></script>
-  <script src="/_sdk/element_sdk.js"></script>
+
 <meta property ="og:image" content="\image\logo.png">
     <link rel="icon" href="\image\logo.png" >
     <link rel="shortcut icon" href="\image\logo.png">
@@ -1211,22 +1210,11 @@
     categories.forEach(cat => selectedVotes[cat.id] = null);
 
     let allVotes = [];
-    let statsUnlocked = false;
+let statsUnlocked = false;
 
-    // Initialize Data SDK
-    const dataHandler = {
-      onDataChanged(data) {
-        allVotes = data || [];
-        if (statsUnlocked) updateStats();
-      }
-    };
+const SCRIPT_URL = "PASTE_YOUR_WEB_APP_URL_HERE";
 
-    (async () => {
-      const initResult = await window.dataSdk.init(dataHandler);
-      if (!initResult.isOk) {
-        console.error('Failed to initialize Data SDK');
-      }
-    })();
+   
 
     // Tab switching
     document.querySelectorAll('.nav-tab').forEach(btn => {
@@ -1286,18 +1274,68 @@
     }
 
     // Submit votes
-    document.getElementById('submit-btn').addEventListener('click', async () => {
-      const btn = document.getElementById('submit-btn');
-      btn.disabled = true;
+    
+      // Submit votes
+document.getElementById('submit-btn').addEventListener('click', async () => {
 
-      const voteData = {
-        votes: JSON.stringify(selectedVotes),
-        timestamp: new Date().toISOString()
-      };
-      
-if(localStorage.getItem("starMagazineVoted")) {
-   alert("You have already voted on this device.");
-   btn.disabled = false;
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+
+  try {
+
+    const response = await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        votes: selectedVotes
+      })
+    });
+
+    const result = await response.json();
+
+    if (!result.success) {
+      alert(result.message || "Voting failed");
+      btn.disabled = false;
+      return;
+    }
+
+    // Reset selections
+    selectedVotes = {};
+    categories.forEach(cat => selectedVotes[cat.id] = null);
+
+    document.querySelectorAll('.option-card').forEach(c => {
+      c.classList.remove('selected');
+    });
+
+    updateProgress();
+
+    // Show thank you page
+    document.querySelectorAll('.content-section').forEach(s => {
+      s.classList.remove('active');
+    });
+
+    const thankYouSection = document.getElementById('thank-you-section');
+
+    thankYouSection.classList.add('active');
+    thankYouSection.style.display = 'flex';
+    thankYouSection.style.visibility = 'visible';
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+
+  } catch (error) {
+
+    console.error(error);
+    alert("Could not submit vote");
+
+  }
+
+  btn.disabled = false;
+});
    return;
 }
 
@@ -1368,29 +1406,107 @@ if (!response.success) {
       }
     });
 
-    function updateStats() {
-      if (!statsUnlocked) return;
+    async function updateStats() {
 
-      const totalVotes = allVotes.length;
-      document.getElementById('total-votes-count').textContent = totalVotes;
+  if (!statsUnlocked) return;
 
-      const stats = {};
-      categories.forEach(cat => {
-        stats[cat.id] = {};
-      });
+  try {
 
-      allVotes.forEach(vote => {
-        try {
-          const votes = typeof vote.votes === 'string' ? JSON.parse(vote.votes) : vote.votes;
-          Object.entries(votes).forEach(([category, option]) => {
-            if (option && stats[category]) {
-              stats[category][option] = (stats[category][option] || 0) + 1;
-            }
-          });
-        } catch (e) {
-          console.error('Error parsing vote:', e);
+    const response = await fetch(SCRIPT_URL);
+    const data = await response.json();
+
+    allVotes = data.votes || [];
+
+    const totalVotes = data.totalVotes || 0;
+
+    document.getElementById('total-votes-count').textContent = totalVotes;
+
+    const stats = {};
+
+    categories.forEach(cat => {
+      stats[cat.id] = {};
+    });
+
+    allVotes.forEach(vote => {
+
+      const votes = vote.votes;
+
+      Object.entries(votes).forEach(([category, option]) => {
+
+        if (option && stats[category]) {
+
+          stats[category][option] =
+            (stats[category][option] || 0) + 1;
+
         }
+
       });
+
+    });
+
+    const container = document.getElementById('stats-cards-container');
+
+    container.innerHTML = '';
+
+    categories.forEach(cat => {
+
+      const card = document.createElement('div');
+
+      card.className = 'stats-card';
+
+      const categoryStats = stats[cat.id] || {};
+
+      const categoryTotal =
+        Object.values(categoryStats)
+        .reduce((a, b) => a + b, 0);
+
+      let html =
+        `<h3 class="stats-title">${cat.title}</h3>
+         <div class="stats-grid">`;
+
+      Object.entries(categoryStats)
+        .sort((a, b) => b[1] - a[1])
+        .forEach(([option, count]) => {
+
+          const percentage =
+            categoryTotal > 0
+            ? ((count / categoryTotal) * 100).toFixed(1)
+            : 0;
+
+          html += `
+            <div class="stat-item">
+              <div class="stat-details">
+                <p class="stat-name">${option}</p>
+                <div class="stat-bar-container">
+                  <div class="stat-bar"
+                    style="width:${percentage}%">
+                    <span class="stat-percentage">
+                      ${percentage}%
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="stat-count">${count}</div>
+            </div>
+          `;
+
+        });
+
+      html += '</div>';
+
+      card.innerHTML = html;
+
+      container.appendChild(card);
+
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+  }
+
+}
 
       const container = document.getElementById('stats-cards-container');
       container.innerHTML = '';
