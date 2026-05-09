@@ -1301,15 +1301,6 @@ if(localStorage.getItem("starMagazineVoted")) {
    return;
 }
 
-// Get IP address
-const ipData = await fetch("https://api.ipify.org?format=json");
-const ipJson = await ipData.json();
-
-const voteData = {
-   votes: selectedVotes,
-   ip: ipJson.ip
-};
-
 const result = await fetch("https://script.google.com/macros/s/AKfycby7O9ndcZiRSFMzg3x_qAiKz0mMq8_DYvxHAbcDlJF186sRjzKWy--CI0TuSPxgQ0WC/exec", {
    method: "POST",
    headers: {
@@ -1325,12 +1316,6 @@ if (!response.success) {
    btn.disabled = false;
    return;
 }
-
-// Lock this device
-localStorage.setItem("starMagazineVoted", "true");
-      if (!result.isOk) {
-        console.error('Failed to save votes:', result.error);
-      }
 
       selectedVotes = {};
       categories.forEach(cat => selectedVotes[cat.id] = null);
