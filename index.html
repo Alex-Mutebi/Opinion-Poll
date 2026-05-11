@@ -477,6 +477,28 @@
       border-width: 4px;
       display: block; margin: 0 auto 16px;
     }
+   .marquee {
+background-color:#36312a;
+color: white;
+padding: 10px;
+overflow: hidden;
+position: relative;
+white-space: nowrap;
+font-size: 18px;
+height: 30px;
+width: 100%;
+margin-top: 10px;
+margin-left: 0px;
+border-radius:20px;
+}
+.marquee div {
+display: inline-block;
+padding-left: 100%;
+animation: marquee 15s linear infinite;
+}
+@keyframes marquee {
+0% { transform: translateX(0);}
+100%{ transform: transform: translateX(-100%);}
   </style>
  </head>
  <body>
@@ -490,7 +512,12 @@
      <h1>Star Magazine Opinion Poll 2026</h1>
      <p>📌Note: You can only be able to submit the vote after voting for all categories.</p>
     </header>
-
+<div class="marquee">
+	<marquee> 
+       	The Star Magazine 2026 welcomes you to this year's edition of the Opinion Poll.           |         Make your suggestions count in this year's Opinion Poll.   |        Join in to choose who you think deserves the crown this year     |      Voting is just a click away!   |   Do you have an article, story or creative piece?  Kindly submit a document of it with your name and stream to be featured in this year's edition of <strong style="color: #fbbf24;">The Star Magazine</strong> via: starmagazine26@gmail.com       |   <strong style="color: #fbbf24;">The Star Magazine Opinion Poll 2026</strong>  ⇔Powered by: <strong> Alex Mutebi, S.6.E</strong>
+       
+	</marquee>
+</div>
     <nav class="nav-tabs" role="navigation">
      <button class="nav-tab active" data-tab="voting">Vote Now</button>
      <button class="nav-tab" data-tab="statistics">View Statistics</button>
