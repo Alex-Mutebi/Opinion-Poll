@@ -3,17 +3,12 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	 <title>Star Magazine Opinion Poll 2026</title>
-  <meta property="og:title" content="Star Magazine Opinion Poll 2026">
-<meta property="og:description" content="Vote now in the Star Magazine Opinion Poll 2026.">
-<meta property="og:image" content="https://opinion-poll2026.vercel.app/image/Post.png">
-<meta property="og:url" content="https://opinion-poll2026.vercel.app/">
-<meta property="og:type" content="website">
-
-<link rel="icon" href="https://opinion-poll2026.vercel.app/image/logo.png">
-<link rel="shortcut icon" href="https://opinion-poll2026.vercel.app/image/logo.png">
-	 <style>
-	 
+  <title>Star Magazine Opinion Poll 2026</title>
+  <meta property="og:image" content="\image\logo.png">
+  <link rel="icon" href="\image\logo.png">
+  <link rel="shortcut icon" href="\image\logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
     @keyframes glow-pulse {
       0%, 100% { text-shadow: 0 0 20px rgba(220, 38, 38, 0.5), 0 0 40px rgba(251, 191, 36, 0.3); }
       50% { text-shadow: 0 0 30px rgba(220, 38, 38, 0.8), 0 0 60px rgba(251, 191, 36, 0.5); }
@@ -430,12 +425,12 @@
     .thank-you-icon { font-size: 120px; margin-bottom: 32px; filter: drop-shadow(0 8px 24px rgba(16,185,129,0.4)); }
     .thank-you-title {
       font-size: 52px; font-weight: 900; color: #ffffff;
-      margin: 0 0 16px 0; font-family: 'Playfair Display', serif;
+      margin:0 auto 16px;; font-family: 'Playfair Display', serif;
       animation: slide-in 0.8s cubic-bezier(0.4,0,0.2,1) 0.1s both;
     }
     .thank-you-subtitle {
       font-size: 24px; color: #10b981;
-      margin: 0 0 32px 0; font-weight: 600;
+      margin:0 auto 32px;font-weight: 600;
       animation: slide-in 0.8s cubic-bezier(0.4,0,0.2,1) 0.2s both;
     }
     .thank-you-message {
@@ -482,7 +477,7 @@
       border-width: 4px;
       display: block; margin: 0 auto 16px;
     }
- .marquee {
+.marquee {
 background-color:#36312a;
 color: white;
 padding: 10px;
@@ -523,20 +518,28 @@ margin: 0 auto 16px;
  <body>
   <!-- Toast notification -->
   <div id="toast" class="toast"></div>
- <div class="app-container">
+
+  <div class="app-container">
    <div class="app-wrapper">
     <header class="header">
-     <img src="image\logo.png" width="150px" style="display:block;margin:0 auto 16px; >
+     <img src="image\logo.png" width="150px" style="display:block;margin:0 auto 16px; box-shadow: 4px 4px 4px 4px #c51d1d69; border-radius:100px">
      <h1>Star Magazine Opinion Poll 2026</h1>
      <p>📌Note: You can only be able to submit the vote after voting for all categories.</p>
- <div class="marquee">
+ <div class="header" id="header-video">
+  <video autoplay muted loop id="header-video">
+    <source src="image\STAR MAGAZINE ANNOUNCEMENT.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<div class="marquee">
 	<marquee> 
-       	The Star Magazine 2026 welcomes you to this year's edition of the Opinion Poll. _______________Make your suggestions count in this year's Opinion Poll. __________________  Join in to choose who you think deserves the crown this year. _____________________ Voting is just a click away! _____________________Do you have an article, story or creative piece?  Kindly submit a document of it with your name and stream to be featured in this year's edition of <strong style="color: #fbbf24;">The Star Magazine</strong> via: starmagazine26@gmail.com _______________________<strong style="color: #fbbf24;">The Star Magazine Opinion Poll 2026</strong>  <<<⇔>>>Powered by: <strong> Alex Mutebi, S.6.E</strong>
+       	The Star Magazine 2026 welcomes you to this year's edition of the Opinion Poll.________|________Make your suggestions count in this year's Opinion Poll.  __________|_________       Join in to choose who you think deserves the crown this year  __________  |________      Voting is just a click away! _________  | ________  Do you have an article, story or creative piece?  Kindly submit a document of it with your name and stream to be featured in this year's edition of <strong style="color: #fbbf24;">The Star Magazine</strong> via: starmagazine26@gmail.com    _________   | ________  <strong style="color: #fbbf24;">The Star Magazine Opinion Poll 2026</strong>  <strong style="color: #fbbf24;"><<<⇔>>><strong>Powered by: <strong> Alex Mutebi, S.6.E</strong>
        
+
 	</marquee>
-		</div>
+	</div>
     </header>
- </div> 
 
     <nav class="nav-tabs" role="navigation">
      <button class="nav-tab active" data-tab="voting">Vote Now</button>
@@ -829,14 +832,10 @@ margin: 0 auto 16px;
   </div>
 
   <script>
-    // ============================================================
-    // CONFIGURATION — paste your deployed Apps Script URL here
-    // ============================================================
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxM0Ya6XvnoAsvEJyQECbyiiPq9OutO86csypOUdHlUHLZDgD2ygGqVFoxwRk1aknSJ/exec';
-    // Example:
-    // const GAS_URL = 'https://script.google.com/macros/s/AKfycbxXXXXXXXXX/exec';
 
-    const STATS_PASSWORD = '@thestar2026';
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxM0Ya6XvnoAsvEJyQECbyiiPq9OutO86csypOUdHlUHLZDgD2ygGqVFoxwRk1aknSJ/exec';
+   
+    const STATS_PASSWORD = '#TheStarOpinionPoll2026!';
 
     // ============================================================
     // Category definitions
