@@ -482,7 +482,7 @@
       border-width: 4px;
       display: block; margin: 0 auto 16px;
     }
-   .marquee {
+ .marquee {
 background-color:#36312a;
 color: white;
 padding: 10px;
@@ -492,9 +492,10 @@ white-space: nowrap;
 font-size: 18px;
 height: 30px;
 width: 100%;
-margin-top: 10px;
+margin-top: 30px;
 margin-left: 0px;
 border-radius:20px;
+box-shadow: 1px 1px 1px 1px #c51d1d69;
 }
 .marquee div {
 display: inline-block;
@@ -504,6 +505,19 @@ animation: marquee 15s linear infinite;
 @keyframes marquee {
 0% { transform: translateX(0);}
 100%{ transform: transform: translateX(-100%);}
+}
+#header-video {
+  width: 100%;
+  height: 350px;
+  object-fit: fill;
+  position: relative;
+  top: 10px;
+  bottom: 10px;
+border-radius: 20px;
+  z-index: -1;
+box-shadow:  20px 11px 20px 0px #c51d1d69;;
+margin: 0 auto 16px;
+}
   </style>
  </head>
  <body>
@@ -513,9 +527,15 @@ animation: marquee 15s linear infinite;
   <div class="app-container">
    <div class="app-wrapper">
     <header class="header">
-     <img src="image\logo.png" width="150px" style="display:block;margin:0 auto 16px;">
+     <img src="image\logo.png" width="150px" style="display:block;margin:0 auto 16px; >
      <h1>Star Magazine Opinion Poll 2026</h1>
      <p>📌Note: You can only be able to submit the vote after voting for all categories.</p>
+ <div class="header" id="header-video">
+  <video autoplay muted loop id="header-video">
+    <source src="image\STAR MAGAZINE ANNOUNCEMENT.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
 		<div class="marquee">
 	<marquee> 
        	The Star Magazine 2026 welcomes you to this year's edition of the Opinion Poll. _______________Make your suggestions count in this year's Opinion Poll. __________________  Join in to choose who you think deserves the crown this year. _____________________ Voting is just a click away! _____________________Do you have an article, story or creative piece?  Kindly submit a document of it with your name and stream to be featured in this year's edition of <strong style="color: #fbbf24;">The Star Magazine</strong> via: starmagazine26@gmail.com _______________________<strong style="color: #fbbf24;">The Star Magazine Opinion Poll 2026</strong>  <<<⇔>>>Powered by: <strong> Alex Mutebi, S.6.E</strong>
